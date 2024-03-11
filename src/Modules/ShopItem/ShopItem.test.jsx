@@ -1,7 +1,37 @@
+import { screen, render } from "@testing-library/react";
+import ShopItem from "./ShopItem";
+import { expect } from "vitest";
+
 describe("Shop item", () => {
-  it("renders propertly in list mode");
-  it("renders propertly in grid mode");
-  it("has product's image");
-  it("has product's price as heading");
-  it("has first 24 chars of product's description in paragraph");
+  it("renders propertly in list mode", () => {
+    render(<ShopItem />);
+    expect(screen.getByRole("listitem")).toBeInTheDocument();
+  });
+  it("renders propertly in grid mode", () => {
+    render(<ShopItem gridMode={true} />);
+    expect(screen.queryByRole("listitem")).toBe(null);
+    expect(screen.getByRole("gridcell")).toBeInTheDocument();
+  });
+  it("has product's image", () => {
+    render(<ShopItem />);
+    expect(screen.getByRole("img")).toBeInTheDocument();
+  });
+  it("has product's name as heading", () => {
+    render(<ShopItem name="Example Product" />);
+    expect(screen.getAllByRole("heading")[0].textContent).toBe(
+      "Example Product"
+    );
+  });
+  it("has product's price as heading 2", () => {
+    render(<ShopItem price={32} />);
+    expect(screen.getAllByRole("heading")[1].textContent).toBe("32");
+  });
+  it("has first 50 chars of product's description in paragraph", () => {
+    render(
+      <ShopItem description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quibusdam blanditiis enim quo, laudantium repellat commodi nihil? Aperiam, ut ex." />
+    );
+    expect(screen.getByRole("paragraph").textContent).toBe(
+      "Lorem ipsum dolor sit amet consectetur adipisicing..."
+    );
+  });
 });
