@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
 import Navbar from "./Navbar";
 import { render, screen } from "@testing-library/react";
-import { BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 describe("Navbar", () => {
   it("renders propertly", () => {
@@ -27,7 +27,7 @@ describe("Navbar", () => {
     render(<Navbar hasCart={true} />, { wrapper: BrowserRouter });
     expect(screen.getByRole("button")).toBeInTheDocument();
   });
-  it("calls callback on click propertly", async () => {
+  it("calls callback on cart click propertly", async () => {
     const cartClickHandle = vi.fn();
     render(<Navbar hasCart={true} onCartClick={cartClickHandle} />, {
       wrapper: BrowserRouter,
