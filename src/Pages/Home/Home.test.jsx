@@ -12,8 +12,4 @@ describe("Homepage", () => {
       })
     ).toBeInTheDocument();
   });
-  it("Should have navbar", () => {
-    render(<Home />, { wrapper: BrowserRouter });
-    expect(screen.getByRole("navigation")).toBeInTheDocument();
-  });
 });

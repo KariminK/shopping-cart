@@ -10,9 +10,5 @@ describe("Shop", () => {
       screen.getByRole("heading", { name: "Products:" })
     ).toBeInTheDocument();
   });
-  it("has navbar with cart button", () => {
-    render(<Shop />, { wrapper: BrowserRouter });
-    expect(screen.getByRole("navigation")).toBeInTheDocument();
-  });
   it("renders products given in props", () => {});
 });

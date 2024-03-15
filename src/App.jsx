@@ -1,26 +1,19 @@
-import { Route, Routes, createBrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Shop from "./Pages/Shop/Shop";
 import ErrorPage from "./Pages/Error/Error";
+import Navbar from "./Modules/Navbar/Navbar";
 
 const App = () => {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Home />,
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: "/shop",
-      element: <Shop />,
-    },
-  ]);
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/shop" element={<Shop />} />
-      <Route path="*" element={<ErrorPage />} />
-    </Routes>
+    <div className="h-screen bg-slate-800">
+      <Navbar hasCart={true} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </div>
   );
 };
 export default App;
