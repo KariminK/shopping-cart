@@ -6,7 +6,7 @@ import Navbar from "./Modules/Navbar/Navbar";
 
 const App = () => {
   return (
-    <div className="h-screen bg-slate-800">
+    <div className="h-screen ">
       <Navbar hasCart={true} />
       <Routes>
         <Route path="/" element={<Home />} />

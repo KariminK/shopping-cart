@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 const Navbar = ({ hasCart, onCartClick }) => {
   const [showLinks, setShowLinks] = useState(false);
   return (
-    <nav className=" text-slate-100 p-3 border-b-black">
+    <nav className=" text-slate-100 px-5 py-5 bg-slate-800 border-b-black box">
       <div className="MOBILE_MENU sm:hidden flex justify-between flex-wrap">
-        <h1 className="text-3xl font-bold">eShop</h1>
+        <h1 className="text-3xl font-bold text-yellow-400">eShop</h1>
         <button
           onClick={() => {
             setShowLinks(!showLinks);
@@ -18,17 +18,23 @@ const Navbar = ({ hasCart, onCartClick }) => {
         {showLinks && (
           <div
             className={
-              "links flex flex-col w-full justify-center text-left gap-5 mt-5 sm:block sm:w-max sm:mt-0"
+              "links flex flex-col w-full justify-center text-left mt-5 sm:block sm:w-max sm:mt-0"
             }
           >
-            <Link className="mx-5" to={"/"}>
+            <Link
+              className="mx-5 py-3 hover:text-yellow-400 transition border-b border-b-slate-100"
+              to={"/"}
+            >
               Home
             </Link>
-            <Link className="mx-5" to={"/shop"}>
+            <Link
+              className="mx-5 py-3 hover:text-yellow-400 transition border-b border-b-slate-100"
+              to={"/shop"}
+            >
               Shop
             </Link>
             {hasCart && (
-              <button className="mx-5 text-left" onClick={onCartClick}>
+              <button className="mx-5 py-3 text-left" onClick={onCartClick}>
                 Cart
               </button>
             )}
@@ -36,16 +42,25 @@ const Navbar = ({ hasCart, onCartClick }) => {
         )}
       </div>
       <div className="DESKTOP_MENU hidden sm:flex justify-between items-center">
-        <h1 className="text-3xl font-bold">eShop</h1>
+        <h1 className="text-4xl font-bold text-yellow-400">eShop</h1>
         <div className={"links"}>
-          <Link className="mx-5" to={"/"}>
+          <Link
+            className="px-5 border-r hover:text-yellow-400 transition text-xl border-slate-100"
+            to={"/"}
+          >
             Home
           </Link>
-          <Link className="mx-5" to={"/shop"}>
+          <Link
+            className="px-5 border-r hover:text-yellow-400 transition text-xl border-slate-100"
+            to={"/shop"}
+          >
             Shop
           </Link>
           {hasCart && (
-            <button className="mx-5 text-left" onClick={onCartClick}>
+            <button
+              className="mx-5 text-left hover:text-yellow-400 transition text-xl"
+              onClick={onCartClick}
+            >
               Cart
             </button>
           )}
