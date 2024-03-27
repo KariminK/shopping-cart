@@ -33,4 +33,8 @@ describe("Shop", () => {
     const listItems = screen.getAllByRole("listitem");
     expect(listItems).toHaveLength(2);
   });
+  it("has options section", () => {
+    render(<Shop />, { wrapper: BrowserRouter });
+    expect(screen.getByRole("menu").id).toBe("filters");
+  });
 });

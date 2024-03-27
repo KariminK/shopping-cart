@@ -6,41 +6,43 @@ const Navbar = ({ hasCart, onCartClick }) => {
   const [showLinks, setShowLinks] = useState(false);
   return (
     <nav className=" text-slate-100 px-5 py-5 bg-slate-800 border-b-black box">
-      <div className="MOBILE_MENU sm:hidden flex justify-between flex-wrap">
-        <h1 className="text-3xl font-bold text-yellow-400">eShop</h1>
-        <button
-          onClick={() => {
-            setShowLinks(!showLinks);
-          }}
-        >
-          <img src={navbarIcon} alt="show links" className="w-7" />
-        </button>
-        {showLinks && (
-          <div
-            className={
-              "links flex flex-col w-full justify-center text-left mt-5 sm:block sm:w-max sm:mt-0"
-            }
+      {window.innerWidth < 600 && (
+        <div className="MOBILE_MENU sm:hidden flex justify-between flex-wrap">
+          <h1 className="text-3xl font-bold text-yellow-400">eShop</h1>
+          <button
+            onClick={() => {
+              setShowLinks(!showLinks);
+            }}
           >
-            <Link
-              className="mx-5 py-3 hover:text-yellow-400 transition border-b border-b-slate-100"
-              to={"/"}
+            <img src={navbarIcon} alt="show links" className="w-7" />
+          </button>
+          {showLinks && (
+            <div
+              className={
+                "links flex flex-col w-full justify-center text-left mt-5 sm:block sm:w-max sm:mt-0"
+              }
             >
-              Home
-            </Link>
-            <Link
-              className="mx-5 py-3 hover:text-yellow-400 transition border-b border-b-slate-100"
-              to={"/shop"}
-            >
-              Shop
-            </Link>
-            {hasCart && (
-              <button className="mx-5 py-3 text-left" onClick={onCartClick}>
-                Cart
-              </button>
-            )}
-          </div>
-        )}
-      </div>
+              <Link
+                className="mx-5 py-3 hover:text-yellow-400 transition border-b border-b-slate-100"
+                to={"/"}
+              >
+                Home
+              </Link>
+              <Link
+                className="mx-5 py-3 hover:text-yellow-400 transition border-b border-b-slate-100"
+                to={"/shop"}
+              >
+                Shop
+              </Link>
+              {hasCart && (
+                <button className="mx-5 py-3 text-left" onClick={onCartClick}>
+                  Cart
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+      )}
       <div className="DESKTOP_MENU hidden sm:flex justify-between items-center">
         <h1 className="text-4xl font-bold text-yellow-400">eShop</h1>
         <div className={"links"}>
