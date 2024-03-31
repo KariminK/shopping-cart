@@ -1,9 +1,44 @@
-const ShopSettings = ({ onModeChange, mode }) => {
+import { useState } from "react";
+
+const ShopSettings = ({ onFilter, categories }) => {
+  const [mode, setMode] = useState("list");
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(100);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  let categoryElements = [];
+  if (Array.isArray(categories)) {
+    categories.forEach((category, index) => {
+      categoryElements.push(
+        <option key={index} value={category}>
+          {category}
+        </option>
+      );
+    });
+  }
+  const filterHandle = (e) => {
+    e.preventDefault();
+    const filterData = {
+      mode,
+      minPrice,
+      maxPrice,
+      selectedCategory,
+    };
+    onFilter(filterData);
+  };
   return (
-    <section role="menu" id="filters">
-      <button onClick={onModeChange}>{mode + " mode"}</button>
-      <button>Filter</button>
-    </section>
+    <form aria-label="filters">
+      <button>{mode + " mode"}</button>
+      <label htmlFor="minPrice">Min. price:</label>
+      <input type="text" name="minPrice" id="minPrice" />
+      <label htmlFor="minPrice">Max. price:</label>
+      <input type="text" name="maxPrice" id="maxPrice" />
+      <label htmlFor="category">Category:</label>
+      <select name="category" id="category">
+        {categoryElements}
+      </select>
+      <button onClick={filterHandle}>Filter</button>
+    </form>
   );
 };
 export default ShopSettings;

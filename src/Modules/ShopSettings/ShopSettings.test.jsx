@@ -6,28 +6,49 @@ import userEvent from "@testing-library/user-event";
 describe("Shop settings", () => {
   it("renders propertly", () => {
     render(<ShopSettings />);
-    expect(screen.getByRole("menu")).toBeInTheDocument();
+    expect(screen.getByRole("form")).toBeInTheDocument();
   });
   it("has grid to list mode switch button", () => {
-    render(<ShopSettings mode={"list"} />);
+    render(<ShopSettings />);
     expect(
       screen.getByRole("button", { name: "list mode" })
     ).toBeInTheDocument();
   });
-  it("if list mode button clicked, it's text changes to grid mode and calls callback", async () => {
-    const changeModeHandle = vi.fn();
-    render(<ShopSettings onModeChange={changeModeHandle} mode={"list"} />);
-    const user = userEvent.setup();
-    const button = screen.getByRole("button", { name: "list mode" });
-    await user.click(button);
-    expect(changeModeHandle).toBeCalled();
+  it("has min and max price inputs", () => {
+    render(<ShopSettings />);
+    expect(screen.getByLabelText("Min. price:")).toBeInTheDocument();
+    expect(screen.getByLabelText("Max. price:")).toBeInTheDocument();
   });
-  it("has min and max price inputs");
-  it("has product categories select");
-  it("product categories select has categories given in props in options");
+  it("has product categories select", () => {
+    render(<ShopSettings />);
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
+  });
+  it("product categories select has categories given in props in options", () => {
+    const optionsExamples = ["Lorem", "Ipsum", "Dolor", "Sit admet"];
+    render(<ShopSettings categories={optionsExamples} />);
+    const options = screen.getAllByRole("option");
+    options.forEach((option, index) => {
+      expect(option).toBeInTheDocument();
+      expect(option.value).toBe(optionsExamples[index]);
+    });
+  });
   it("has filter button", () => {
     render(<ShopSettings />);
     expect(screen.getByRole("button", { name: "Filter" })).toBeInTheDocument();
   });
-  it("calls callback after filter button click");
+  it("calls callback after filter button click, and pass into it all form data into an object", async () => {
+    const onFilter = vi.fn((filters) => {
+      expect(filters).toEqual({
+        mode: "list",
+        minPrice: 0,
+        maxPrice: 100,
+        selectedCategory: "All",
+      });
+    });
+    render(<ShopSettings onFilter={onFilter} />);
+    const filterButton = screen.getByRole("button", { name: "Filter" });
+    const user = userEvent.setup();
+    await user.click(filterButton);
+    expect(onFilter).toReturn();
+  });
 });

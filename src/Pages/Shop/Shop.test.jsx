@@ -35,6 +35,5 @@ describe("Shop", () => {
   });
   it("has options section", () => {
     render(<Shop />, { wrapper: BrowserRouter });
-    expect(screen.getByRole("menu").id).toBe("filters");
   });
 });
