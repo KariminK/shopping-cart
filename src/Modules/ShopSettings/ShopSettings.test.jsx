@@ -36,6 +36,34 @@ describe("Shop settings", () => {
     render(<ShopSettings />);
     expect(screen.getByRole("button", { name: "Filter" })).toBeInTheDocument();
   });
+  it("listens to change event on minPrice input correctly", async () => {
+    render(<ShopSettings />);
+    const minPriceInput = screen.getByLabelText("Min. price:");
+    const user = userEvent.setup();
+    await user.click(minPriceInput);
+    await user.clear(minPriceInput);
+    await user.keyboard("20");
+    expect(minPriceInput.value).toBe("20");
+  });
+  it("listens to change event on maxPrice input correctly", async () => {
+    render(<ShopSettings />);
+    const maxPriceInput = screen.getByLabelText("Max. price:");
+    const user = userEvent.setup();
+    await user.click(maxPriceInput);
+    await user.clear(maxPriceInput);
+    await user.keyboard("20");
+    expect(maxPriceInput.value).toBe("20");
+  });
+  it("disallows putting not a number characters into minPrice and maxPrice inputs", async () => {
+    render(<ShopSettings />);
+    const minPriceInput = screen.getByLabelText("Min. price:");
+    const user = userEvent.setup();
+    await user.click(minPriceInput);
+    await user.clear(minPriceInput);
+    await user.keyboard("20w");
+    expect(minPriceInput.value).toBe("20");
+  });
+  it("listens to select category correctly");
   it("calls callback after filter button click, and pass into it all form data into an object", async () => {
     const onFilter = vi.fn((filters) => {
       expect(filters).toEqual({

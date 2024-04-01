@@ -5,6 +5,12 @@ const ShopSettings = ({ onFilter, categories }) => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(100);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const priceChangeHandler = (e, setPrice) => {
+    e.preventDefault();
+    if (!isNaN(Number(e.target.value))) {
+      setPrice(e.target.value);
+    }
+  };
 
   let categoryElements = [];
   if (Array.isArray(categories)) {
@@ -30,7 +36,13 @@ const ShopSettings = ({ onFilter, categories }) => {
     <form aria-label="filters">
       <button>{mode + " mode"}</button>
       <label htmlFor="minPrice">Min. price:</label>
-      <input type="text" name="minPrice" id="minPrice" />
+      <input
+        type="text"
+        name="minPrice"
+        value={minPrice}
+        onChange={(e) => priceChangeHandler(e, setMinPrice)}
+        id="minPrice"
+      />
       <label htmlFor="minPrice">Max. price:</label>
       <input type="text" name="maxPrice" id="maxPrice" />
       <label htmlFor="category">Category:</label>
