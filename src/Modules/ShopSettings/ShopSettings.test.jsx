@@ -54,7 +54,7 @@ describe("Shop settings", () => {
     await user.keyboard("20");
     expect(maxPriceInput.value).toBe("20");
   });
-  it("disallows putting not a number characters into minPrice and maxPrice inputs", async () => {
+  it("disallows putting not a number characters into minPrice input", async () => {
     render(<ShopSettings />);
     const minPriceInput = screen.getByLabelText("Min. price:");
     const user = userEvent.setup();
@@ -63,7 +63,22 @@ describe("Shop settings", () => {
     await user.keyboard("20w");
     expect(minPriceInput.value).toBe("20");
   });
-  it("listens to select category correctly");
+  it("disallows putting not a number characters into maxPrice input", async () => {
+    render(<ShopSettings />);
+    const maxPriceInput = screen.getByLabelText("Max. price:");
+    const user = userEvent.setup();
+    await user.click(maxPriceInput);
+    await user.clear(maxPriceInput);
+    await user.keyboard("20w");
+    expect(maxPriceInput.value).toBe("20");
+  });
+  it("listens to select category correctly", async () => {
+    render(<ShopSettings categories={["example1", "example2", "example3"]} />);
+    const user = userEvent.setup();
+    const select = screen.getByRole("combobox", { name: "Category:" });
+    await user.selectOptions(select, "example1");
+    expect(select.value).toBe("example1");
+  });
   it("calls callback after filter button click, and pass into it all form data into an object", async () => {
     const onFilter = vi.fn((filters) => {
       expect(filters).toEqual({
@@ -78,5 +93,36 @@ describe("Shop settings", () => {
     const user = userEvent.setup();
     await user.click(filterButton);
     expect(onFilter).toReturn();
+  });
+  it("passes correct data after changing default", async () => {
+    const onFilter = vi.fn((filters) => {
+      expect(filters).toEqual({
+        mode: "grid",
+        minPrice: 20,
+        maxPrice: 140,
+        selectedCategory: "example2",
+      });
+    });
+    render(
+      <ShopSettings
+        categories={["example1", "example2", "example3"]}
+        onFilter={onFilter}
+      />
+    );
+    const select = screen.getByRole("combobox");
+    const maxPriceInput = screen.getByLabelText("Max. price:");
+    const minPriceInput = screen.getByLabelText("Min. price:");
+    const changeModeBtn = screen.getByRole("button", { name: "list mode" });
+    const filterBtn = screen.getByRole("button", { name: "Filter" });
+    const user = userEvent.setup();
+    await user.click(minPriceInput);
+    await user.clear(minPriceInput);
+    await user.type(minPriceInput, "20");
+    await user.click(maxPriceInput);
+    await user.clear(maxPriceInput);
+    await user.type(maxPriceInput, "140");
+    await user.click(changeModeBtn);
+    await user.selectOptions(select, "example2");
+    await user.click(filterBtn);
   });
 });

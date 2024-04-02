@@ -8,8 +8,12 @@ const ShopSettings = ({ onFilter, categories }) => {
   const priceChangeHandler = (e, setPrice) => {
     e.preventDefault();
     if (!isNaN(Number(e.target.value))) {
-      setPrice(e.target.value);
+      setPrice(+e.target.value);
     }
+  };
+  const selectCategoryHandler = (e) => {
+    e.preventDefault();
+    setSelectedCategory(e.target.value);
   };
 
   let categoryElements = [];
@@ -34,7 +38,14 @@ const ShopSettings = ({ onFilter, categories }) => {
   };
   return (
     <form aria-label="filters">
-      <button>{mode + " mode"}</button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          mode === "list" ? setMode("grid") : setMode("list");
+        }}
+      >
+        {mode + " mode"}
+      </button>
       <label htmlFor="minPrice">Min. price:</label>
       <input
         type="text"
@@ -43,10 +54,21 @@ const ShopSettings = ({ onFilter, categories }) => {
         onChange={(e) => priceChangeHandler(e, setMinPrice)}
         id="minPrice"
       />
-      <label htmlFor="minPrice">Max. price:</label>
-      <input type="text" name="maxPrice" id="maxPrice" />
+      <label htmlFor="maxPrice">Max. price:</label>
+      <input
+        type="text"
+        name="maxPrice"
+        id="maxPrice"
+        value={maxPrice}
+        onChange={(e) => priceChangeHandler(e, setMaxPrice)}
+      />
       <label htmlFor="category">Category:</label>
-      <select name="category" id="category">
+      <select
+        name="category"
+        id="category"
+        onChange={(e) => selectCategoryHandler(e)}
+        value={selectedCategory}
+      >
         {categoryElements}
       </select>
       <button onClick={filterHandle}>Filter</button>
