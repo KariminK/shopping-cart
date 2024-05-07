@@ -1,18 +1,15 @@
 import { render, screen } from "@testing-library/react";
 import Cart from "./Cart";
 import { expect } from "vitest";
+import { BrowserRouter } from "react-router-dom";
 describe("Cart", () => {
-  it("renders propertly", () => {
-    render(<Cart />);
-    expect(screen.getByRole("dialog")).toBeInTheDocument();
-  });
   it("has close button", () => {
-    render(<Cart />);
-    expect(screen.getByRole("button")).toBeInTheDocument();
-    expect(screen.getByRole("button").textContent).toBe("X");
+    render(<Cart />, { wrapper: BrowserRouter });
+    expect(screen.getByRole("link")).toBeInTheDocument();
+    expect(screen.getByRole("link").textContent).toBe("Back to shop");
   });
   it("if its empty, has 'Cart is empty' heading", () => {
-    render(<Cart products={[]} />);
+    render(<Cart products={[]} />, { wrapper: BrowserRouter });
     expect(screen.queryByRole("list")).toBe(null);
     expect(screen.getByRole("heading").textContent).toBe("Cart is empty");
   });
@@ -27,7 +24,8 @@ describe("Cart", () => {
             image: "",
           },
         ]}
-      />
+      />,
+      { wrapper: BrowserRouter }
     );
     expect(screen.getByRole("list")).toBeInTheDocument();
     expect(screen.getByRole("listitem")).toBeInTheDocument();

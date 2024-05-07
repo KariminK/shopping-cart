@@ -27,14 +27,4 @@ describe("Navbar", () => {
     render(<Navbar hasCart={true} />, { wrapper: BrowserRouter });
     expect(screen.getByRole("button")).toBeInTheDocument();
   });
-  it("calls callback on cart click propertly", async () => {
-    const cartClickHandle = vi.fn();
-    render(<Navbar hasCart={true} onCartClick={cartClickHandle} />, {
-      wrapper: BrowserRouter,
-    });
-    const user = userEvent.setup();
-    const button = screen.getByRole("button");
-    await user.click(button);
-    expect(cartClickHandle).toBeCalled();
-  });
 });

@@ -59,12 +59,12 @@ const Navbar = ({ hasCart, onCartClick }) => {
             Shop
           </Link>
           {hasCart && (
-            <button
+            <Link
               className="mx-5 text-left hover:text-yellow-400 transition text-xl"
-              onClick={onCartClick}
+              to={"/cart"}
             >
               Cart
-            </button>
+            </Link>
           )}
         </div>
       </div>
