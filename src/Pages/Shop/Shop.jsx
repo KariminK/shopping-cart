@@ -5,8 +5,9 @@ const Shop = ({ products }) => {
     productElements = products.map((product) => {
       return (
         <ShopItem
+          gridMode={true}
           productImage={product.image}
-          name={product.name}
+          name={product.title}
           price={product.price}
           description={product.description}
         />
@@ -15,8 +16,9 @@ const Shop = ({ products }) => {
   }
   return (
     <>
-      <h1>Products:</h1>
-      {...productElements}
+      <div className="p-2 grid gap-4 grid-cols-5 bg-slate-300">
+        {...productElements}
+      </div>
     </>
   );
 };
