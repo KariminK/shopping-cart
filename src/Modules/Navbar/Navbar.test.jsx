@@ -21,10 +21,10 @@ describe("Navbar", () => {
   });
   it("doesn't have shopping cart button", () => {
     render(<Navbar />, { wrapper: BrowserRouter });
-    expect(screen.queryByRole("button")).toBe(null);
+    expect(screen.queryByRole("link", { name: "Cart" })).toBe(null);
   });
   it("has shopping cart button", () => {
     render(<Navbar hasCart={true} />, { wrapper: BrowserRouter });
-    expect(screen.getByRole("button")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Cart" })).toBeInTheDocument();
   });
 });

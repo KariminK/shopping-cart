@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 const Navbar = ({ hasCart, onCartClick }) => {
   const [showLinks, setShowLinks] = useState(false);
   return (
-    <nav className=" text-slate-100 px-5 py-5 bg-slate-800 border-b-black box">
-      {window.innerWidth < 600 && (
+    <nav className=" text-slate-700 px-5 py-5 bg-white border-b-black box">
+      {window.innerWidth < 600 ? (
         <div className="MOBILE_MENU sm:hidden flex justify-between flex-wrap">
           <h1 className="text-3xl font-bold text-yellow-400">eShop</h1>
           <button
@@ -42,32 +42,33 @@ const Navbar = ({ hasCart, onCartClick }) => {
             </div>
           )}
         </div>
-      )}
-      <div className="DESKTOP_MENU hidden sm:flex justify-between items-center">
-        <h1 className="text-4xl font-bold text-yellow-400">eShop</h1>
-        <div className={"links"}>
-          <Link
-            className="px-5 border-r hover:text-yellow-400 transition text-xl border-slate-100"
-            to={"/"}
-          >
-            Home
-          </Link>
-          <Link
-            className="px-5 border-r hover:text-yellow-400 transition text-xl border-slate-100"
-            to={"/shop"}
-          >
-            Shop
-          </Link>
-          {hasCart && (
+      ) : (
+        <div className="DESKTOP_MENU hidden sm:flex mx-auto max-w-7xl my-3 justify-between items-center">
+          <h1 className="text-4xl font-bold text-blue-400">eShop</h1>
+          <div className={"links"}>
             <Link
-              className="mx-5 text-left hover:text-yellow-400 transition text-xl"
-              to={"/cart"}
+              className="px-5 border-r hover:text-blue-400 transition text-xl border-slate-100"
+              to={"/"}
             >
-              Cart
+              Home
             </Link>
-          )}
+            <Link
+              className="px-5 border-r hover:text-blue-400 transition text-xl border-slate-100"
+              to={"/shop"}
+            >
+              Shop
+            </Link>
+            {hasCart && (
+              <Link
+                className="mx-5 text-left hover:text-blue-400 transition text-xl"
+                to={"/cart"}
+              >
+                Cart
+              </Link>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 };

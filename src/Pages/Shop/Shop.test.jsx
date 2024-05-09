@@ -9,13 +9,13 @@ describe("Shop", () => {
       <Shop
         products={[
           {
-            name: "Lorem ipsum",
+            title: "Lorem ipsum",
             description: "lorem ipsum dolor sit admet",
             price: 32,
             image: "",
           },
           {
-            name: "Dolor sit amet",
+            title: "Dolor sit amet",
             description: "test test test",
             price: 120.25,
             image: "",
@@ -24,7 +24,7 @@ describe("Shop", () => {
       />,
       { wrapper: BrowserRouter }
     );
-    const listItems = screen.getAllByRole("listitem");
+    const listItems = screen.getAllByRole("gridcell");
     expect(listItems).toHaveLength(2);
   });
   it("has options section", () => {
