@@ -1,7 +1,20 @@
-const ShopItem = ({ gridMode, productImage, name, price, description }) => {
+import { Link } from "react-router-dom";
+
+const ShopItem = ({
+  gridMode,
+  id,
+  productImage,
+  name,
+  price,
+  description,
+  rating,
+}) => {
   if (gridMode)
     return (
-      <div role="gridcell" className="bg-white p-5 rounded-lg">
+      <div
+        role="gridcell"
+        className="bg-white p-5 rounded-lg border-2 border-slate-400"
+      >
         <div className="h-96 flex items-center justify-center overflow-hidden">
           <img
             src={productImage}
@@ -9,12 +22,23 @@ const ShopItem = ({ gridMode, productImage, name, price, description }) => {
             className="mx-auto h-4/5"
           />
         </div>
-        <h1 className="text-3xl font-bold truncate">{name}</h1>
-        <h2 className="text-5xl text-yellow-900 my-3">{price}$</h2>
-        <p role="paragraph" className="text-m overflow-hidden h-20">
+        <h1 className="text-2xl font-bold truncate">{name}</h1>
+        <p role="paragraph" className="text-m truncate h-fit">
           {description ? description : "No description"}
         </p>
-        <button className="primary-button mt-2">Add to cart</button>
+        <h2 className="text-4xl text-blue-600 font-bold my-3">{price}$</h2>
+
+        <p role="paragraph" className="text-l">
+          {rating
+            ? `${rating.rate}/5★ out of ${rating.count} opinions`
+            : `0 opinions`}
+        </p>
+        <div className="flex justify-center mt-2 gap-2">
+          <button className="primary-button ">Add to cart</button>
+          <Link className="secondary-button" to={"/product/"}>
+            View details
+          </Link>
+        </div>
       </div>
     );
   else

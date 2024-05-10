@@ -6,4 +6,7 @@
   .primary-button {
     @apply bg-blue-600 text-white border-solid border border-blue-600 p-3 px-5 rounded-md hover:bg-white hover:text-blue-600 transition-colors;
   }
+  .secondary-button {
+    @apply primary-button bg-white text-blue-600 hover:bg-blue-600 hover:text-white;
+  }
 }

@@ -10,13 +10,14 @@ const Shop = ({ products }) => {
           name={product.title}
           price={product.price}
           description={product.description}
+          rating={product.rating}
         />
       );
     });
   }
   return (
     <>
-      <div className="p-2 grid gap-4 grid-cols-5 bg-slate-300">
+      <div className="mx-10 p-3 grid gap-4 grid-cols-4">
         {...productElements}
       </div>
     </>
