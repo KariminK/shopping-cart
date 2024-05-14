@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import placeholderImg from "/src/assets/stuff.jpeg";
 const Home = () => {
   return (
     <>
@@ -14,13 +14,16 @@ const Home = () => {
             neque in itaque assumenda eos doloribus adipisci cupiditate porro
             vitae iusto.
           </p>
-          <Link className="primary-button">Shop now</Link>
+          <Link className="primary-button" to={"/shop"}>
+            Shop now
+          </Link>
         </div>
-        <div className="border-2 p-5 border-blue-500">
+        <div className="border-2 shadow-inner border-blue-500">
           <img
-            src="https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
+            src={placeholderImg}
             alt=""
-            className="w-[450px] place-self-start"
+            className="w-[500px] place-self-start"
+            title="created with bing"
           />
         </div>
       </section>

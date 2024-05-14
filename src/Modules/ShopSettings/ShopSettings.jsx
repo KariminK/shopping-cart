@@ -37,42 +37,63 @@ const ShopSettings = ({ onFilter, categories }) => {
     onFilter(filterData);
   };
   return (
-    <form aria-label="filters">
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          mode === "list" ? setMode("grid") : setMode("list");
-        }}
+    <>
+      <form
+        aria-label="filters"
+        className="flex items-center justify-between max-w-7xl mx-auto flex-wrap"
       >
-        {mode + " mode"}
-      </button>
-      <label htmlFor="minPrice">Min. price:</label>
-      <input
-        type="text"
-        name="minPrice"
-        value={minPrice}
-        onChange={(e) => priceChangeHandler(e, setMinPrice)}
-        id="minPrice"
-      />
-      <label htmlFor="maxPrice">Max. price:</label>
-      <input
-        type="text"
-        name="maxPrice"
-        id="maxPrice"
-        value={maxPrice}
-        onChange={(e) => priceChangeHandler(e, setMaxPrice)}
-      />
-      <label htmlFor="category">Category:</label>
-      <select
-        name="category"
-        id="category"
-        onChange={(e) => selectCategoryHandler(e)}
-        value={selectedCategory}
-      >
-        {categoryElements}
-      </select>
-      <button onClick={filterHandle}>Filter</button>
-    </form>
+        <h1 className="text-2xl font-bold w-full mb-2">Filters:</h1>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            mode === "list" ? setMode("grid") : setMode("list");
+          }}
+          className="secondary-button w-32"
+        >
+          {mode + " mode"}
+        </button>
+        <label htmlFor="minPrice">
+          Min. price:{" "}
+          <input
+            type="text"
+            name="minPrice"
+            value={minPrice}
+            onChange={(e) => priceChangeHandler(e, setMinPrice)}
+            id="minPrice"
+            className="border border-blue-400 rounded px-2 py-1 w-12"
+          />
+        </label>
+
+        <label htmlFor="maxPrice">
+          Max. price:{" "}
+          <input
+            type="text"
+            name="maxPrice"
+            id="maxPrice"
+            value={maxPrice}
+            onChange={(e) => priceChangeHandler(e, setMaxPrice)}
+            className="border border-blue-400 rounded px-2  py-1 w-12"
+          />
+        </label>
+
+        <label htmlFor="category">
+          Category:{" "}
+          <select
+            name="category"
+            id="category"
+            onChange={(e) => selectCategoryHandler(e)}
+            value={selectedCategory}
+            className="border border-blue-400 p-1 rounded"
+          >
+            {categoryElements}
+          </select>
+        </label>
+
+        <button onClick={filterHandle} className="primary-button">
+          Filter
+        </button>
+      </form>
+    </>
   );
 };
 export default ShopSettings;

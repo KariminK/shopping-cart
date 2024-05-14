@@ -9,4 +9,7 @@
   .secondary-button {
     @apply primary-button bg-white text-blue-600 hover:bg-blue-600 hover:text-white;
   }
+  .remove-button {
+    @apply text-red-600 font-bold border-solid border border-red-600 p-3 px-5 rounded-md hover:bg-red-500 hover:text-white transition-colors;
+  }
 }

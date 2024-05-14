@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import navbarIcon from "../../assets/navbar-icon.svg";
 import { useEffect, useState } from "react";
 
-const Navbar = ({ hasCart, onCartClick }) => {
+const Navbar = ({ hasCart, onCartClick, cartItemsAmount }) => {
   const [showLinks, setShowLinks] = useState(false);
   return (
     <nav className="sticky top-0 w-full text-slate-700 px-5 py-5 bg-white border-b-black box">
@@ -63,7 +63,7 @@ const Navbar = ({ hasCart, onCartClick }) => {
                 className="mx-5 text-left hover:text-blue-400 transition text-xl"
                 to={"/cart"}
               >
-                Cart
+                Cart {cartItemsAmount !== undefined && `[${cartItemsAmount}]`}
               </Link>
             )}
           </div>

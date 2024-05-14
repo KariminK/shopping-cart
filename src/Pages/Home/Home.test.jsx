@@ -8,7 +8,7 @@ describe("Homepage", () => {
     render(<Home />, { wrapper: BrowserRouter });
     expect(
       screen.getByRole("heading", {
-        name: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        name: "Come and discover multiple $tuff",
       })
     ).toBeInTheDocument();
   });

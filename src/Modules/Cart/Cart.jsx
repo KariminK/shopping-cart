@@ -6,16 +6,18 @@ const Cart = ({ products }) => {
     productElems = products.map((product) => {
       return (
         <ShopItem
-          name={product.name}
-          price={product.price}
+          gridMode={false}
           productImage={product.image}
+          name={product.title}
+          price={product.price}
           description={product.description}
+          rating={product.rating}
         />
       );
     });
   }
   return (
-    <section id="Cart">
+    <section id="Cart" className="max-w-7xl mx-auto">
       {productElems.length !== 0 ? (
         <ul>{...productElems}</ul>
       ) : (

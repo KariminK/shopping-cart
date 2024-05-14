@@ -18,7 +18,7 @@ describe("Cart", () => {
       <Cart
         products={[
           {
-            name: "Lorem ipsum",
+            title: "Lorem ipsum",
             description: "lorem ipsum dolor sit admet",
             price: 32,
             image: "",

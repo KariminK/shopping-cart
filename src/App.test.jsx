@@ -9,7 +9,7 @@ describe("App", () => {
     render(<App />, { wrapper: BrowserRouter });
     expect(
       screen.getByRole("heading", {
-        name: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        name: "Come and discover multiple $tuff",
       })
     ).toBeInTheDocument();
   });
@@ -17,7 +17,7 @@ describe("App", () => {
     render(<App />, { wrapper: BrowserRouter });
     expect(
       screen.getByRole("heading", {
-        name: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        name: "Come and discover multiple $tuff",
       })
     ).toBeInTheDocument();
     const link = screen.getByRole("link", { name: "Shop" });

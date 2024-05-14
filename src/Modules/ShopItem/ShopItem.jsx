@@ -8,6 +8,7 @@ const ShopItem = ({
   price,
   description,
   rating,
+  onRemove,
 }) => {
   if (gridMode)
     return (
@@ -43,13 +44,19 @@ const ShopItem = ({
     );
   else
     return (
-      <li className="">
-        <img src={productImage} alt="product's image" />
-        <h1>{name}</h1>
-        <h2>{price}</h2>
-        <p role="paragraph">
-          {description ? description.slice(0, 50) + "..." : "No description"}
-        </p>
+      <li className="flex items-center border border-blue-600 my-2 h-52 rounded">
+        <div className="max-w-28 max-h-52 flex items-center justify-center overflow-hidden mx-3">
+          <img
+            src={productImage}
+            alt="product's image"
+            className="mx-auto h-4/5"
+          />
+        </div>
+        <div>
+          <h1 className="text-2xl font-bold">{name}</h1>
+          <h2 className="text-4xl font-bold text-blue-500 my-3">{price}$</h2>
+          {onRemove ?? <button className="remove-button">Remove item</button>}
+        </div>
       </li>
     );
 };

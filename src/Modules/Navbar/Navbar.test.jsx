@@ -11,7 +11,7 @@ describe("Navbar", () => {
   it("has heading as logo", () => {
     render(<Navbar />, { wrapper: BrowserRouter });
     expect(screen.getByRole("heading")).toBeInTheDocument();
-    expect(screen.getByRole("heading").textContent).toBe("eShop");
+    expect(screen.getByRole("heading").textContent).toBe("$tuff");
   });
   it("has two links: to homepage and shop", () => {
     render(<Navbar />, { wrapper: BrowserRouter });
