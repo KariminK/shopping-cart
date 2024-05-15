@@ -5,16 +5,39 @@ import ErrorPage from "./Pages/Error/Error";
 import Navbar from "./Modules/Navbar/Navbar";
 import Cart from "./Modules/Cart/Cart";
 import useProducts from "./hooks/useProducts";
+import { useState } from "react";
+import ProductDetails from "./Modules/ProductDetails/ProductDetails";
 const App = () => {
   const [loading, error, products] = useProducts();
-  const selectedItems = products.slice(0, 10);
+  const [selectedItems, setSelectedItems] = useState([]);
+  const productRemoveHandler = (productIndex) => {
+    setSelectedItems(
+      selectedItems.filter((item, index) => index !== productIndex)
+    );
+  };
+  const addToCartHandler = (productIndex) => {
+    console.log(products);
+    setSelectedItems([...selectedItems, products[productIndex]]);
+  };
   return (
-    <div className="h-screen ">
+    <div className="h-screen">
       <Navbar hasCart={true} cartItemsAmount={selectedItems.length} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Shop products={products} />} />
-        <Route path="/cart" element={<Cart products={selectedItems} />} />
+        <Route
+          path="/shop"
+          element={<Shop products={products} onAddToCart={addToCartHandler} />}
+        />
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route
+          path="/cart"
+          element={
+            <Cart
+              products={selectedItems}
+              onProductRemove={productRemoveHandler}
+            />
+          }
+        />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>

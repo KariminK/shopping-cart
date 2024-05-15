@@ -1,6 +1,6 @@
 import ShopItem from "../../Modules/ShopItem/ShopItem";
 import ShopSettings from "../../Modules/ShopSettings/ShopSettings";
-const Shop = ({ products }) => {
+const Shop = ({ products, onAddToCart }) => {
   let productElements = [];
   let categories = [];
   if (!Array.isArray(products)) {
@@ -9,15 +9,17 @@ const Shop = ({ products }) => {
   categories = products
     .map((el) => el.category)
     .filter((el, index, arr) => arr.indexOf(el) === index);
-  productElements = products.map((product) => {
+  productElements = products.map((product, index) => {
     return (
       <ShopItem
         gridMode={true}
         productImage={product.image}
+        id={index}
         name={product.title}
         price={product.price}
         description={product.description}
         rating={product.rating}
+        onAddToCart={onAddToCart}
       />
     );
   });

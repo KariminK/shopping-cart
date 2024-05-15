@@ -8,6 +8,7 @@ const ShopItem = ({
   price,
   description,
   rating,
+  onAddToCart,
   onRemove,
 }) => {
   if (gridMode)
@@ -35,8 +36,10 @@ const ShopItem = ({
             : `0 opinions`}
         </p>
         <div className="flex justify-center mt-2 gap-2">
-          <button className="primary-button ">Add to cart</button>
-          <Link className="secondary-button" to={"/product/"}>
+          <button className="primary-button" onClick={() => onAddToCart(id)}>
+            Add to cart
+          </button>
+          <Link className="secondary-button" to={"/product/" + (id + 1)}>
             View details
           </Link>
         </div>
@@ -55,7 +58,11 @@ const ShopItem = ({
         <div>
           <h1 className="text-2xl font-bold">{name}</h1>
           <h2 className="text-4xl font-bold text-blue-500 my-3">{price}$</h2>
-          {onRemove ?? <button className="remove-button">Remove item</button>}
+          {onRemove && (
+            <button className="remove-button" onClick={() => onRemove(id)}>
+              Remove item
+            </button>
+          )}
         </div>
       </li>
     );

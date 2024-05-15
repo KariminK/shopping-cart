@@ -1,17 +1,19 @@
 import { Link } from "react-router-dom";
 import ShopItem from "../ShopItem/ShopItem";
-const Cart = ({ products }) => {
+const Cart = ({ products, onProductRemove }) => {
   let productElems = [];
   if (Array.isArray(products) && products.length !== 0) {
-    productElems = products.map((product) => {
+    productElems = products.map((product, id) => {
       return (
         <ShopItem
           gridMode={false}
+          id={id}
           productImage={product.image}
           name={product.title}
           price={product.price}
           description={product.description}
           rating={product.rating}
+          onRemove={onProductRemove}
         />
       );
     });
@@ -22,7 +24,7 @@ const Cart = ({ products }) => {
         <ul>{...productElems}</ul>
       ) : (
         <div className="my-10">
-          <h1 className="text-5xl font-bold text-yellow-900">Cart is empty</h1>
+          <h1 className="text-5xl font-bold text-blue-500">Cart is empty</h1>
           <p className="text-xl">Go and find something interesting!</p>
         </div>
       )}
