@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
-import placeholderImg from "/src/assets/stuff.jpeg";
+import man1 from "/src/assets/man 1.jpg";
+import man2 from "/src/assets/man 2.jpg";
+
 import { FaAngleRight } from "react-icons/fa6";
 import ListItem from "./components/ListItem";
 const Home = () => {
   return (
     <>
-      <section className="mt-4 max-w-7xl mx-auto grid grid-cols-2 mb-6">
+      <section className="mt-4 max-w-7xl mx-auto grid grid-cols-3 mb-6">
         <div className="max-w-md">
           <h1 className="text-6xl font-bold ">
             Cheapest online store ever on Earth
@@ -25,20 +27,20 @@ const Home = () => {
             <ListItem>No margin for store</ListItem>
           </ul>
         </div>
-        <div className="place-self-center flex">
-          <div className="border-2 shadow-inner justify-self-start border-blue-500">
+        <div className="relative col-span-2">
+          <div className="rotate-6 bg-gradient-to-t from-orange-400 via-yellow-400 to-orange-400 absolute top-5 left-10 shadow-inner h-fit">
             <img
-              src={placeholderImg}
+              src={man1}
               alt=""
-              className="w-[500px]"
+              className="w-[350px] -rotate-6"
               title="created with bing"
             />
           </div>
-          <div className="border-2 shadow-inner justify-self-end border-blue-500">
+          <div className="-rotate-12 bg-gradient-to-t from-orange-400 via-yellow-400 to-orange-400 absolute bottom-5 right-0 shadow-inner h-fit">
             <img
-              src={placeholderImg}
+              src={man2}
               alt=""
-              className="w-[500px]"
+              className="w-[250px] rotate-6"
               title="created with bing"
             />
           </div>
