@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import navbarIcon from "../../assets/navbar-icon.svg";
 import { useEffect, useState } from "react";
 
 const Navbar = ({ hasCart, onCartClick, cartItemsAmount }) => {
   const [showLinks, setShowLinks] = useState(false);
+  const { pathname } = useLocation();
   return (
-    <nav className="sticky top-0 w-full text-slate-700 px-5 py-5 bg-white border-b-black box">
+    <nav className="sticky top-0 w-full text-slate-700 px-5 py-5 border-b-2 border-b-slate-200 bg-white box">
       {window.innerWidth < 600 ? (
         <div className="MOBILE_MENU sm:hidden flex justify-between flex-wrap">
           <h1 className="text-3xl font-bold text-yellow-400">eShop</h1>
@@ -43,24 +44,39 @@ const Navbar = ({ hasCart, onCartClick, cartItemsAmount }) => {
           )}
         </div>
       ) : (
-        <div className="DESKTOP_MENU hidden sm:flex mx-auto max-w-7xl my-3 justify-between items-center">
-          <h1 className="text-4xl font-bold text-blue-600">$tuff</h1>
+        <div className="DESKTOP_MENU hidden sm:flex mx-auto max-w-7xl justify-between items-center">
+          <h1 className="text-4xl font-bold text-orange-600">$tuff</h1>
           <div className={"links"}>
             <Link
-              className="px-5 border-r hover:text-blue-400 transition text-xl border-slate-100"
+              className={
+                "px-5 border-r hover:text-slate-900 transition text-xl pb-2 border-slate-100" +
+                (pathname === "/"
+                  ? " text-orange-600 border-b-2 border-b-orange-500"
+                  : "")
+              }
               to={"/"}
             >
               Home
             </Link>
             <Link
-              className="px-5 border-r hover:text-blue-400 transition text-xl border-slate-100"
+              className={
+                "px-5 border-r hover:text-slate-900 transition text-xl pb-2 border-slate-100" +
+                (pathname === "/shop"
+                  ? " text-orange-600 border-b-2 border-b-orange-500"
+                  : "")
+              }
               to={"/shop"}
             >
               Shop
             </Link>
             {hasCart && (
               <Link
-                className="mx-5 text-left hover:text-blue-400 transition text-xl"
+                className={
+                  "px-5 border-r hover:text-slate-900 transition text-xl pb-2 border-slate-100" +
+                  (pathname === "/cart"
+                    ? " text-orange-600 border-b-2 border-b-orange-500"
+                    : "")
+                }
                 to={"/cart"}
               >
                 Cart {cartItemsAmount !== undefined && `[${cartItemsAmount}]`}

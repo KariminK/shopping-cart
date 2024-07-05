@@ -20,7 +20,7 @@ const App = () => {
     setSelectedItems([...selectedItems, products[productIndex]]);
   };
   return (
-    <div className="h-screen">
+    <div className="">
       <Navbar hasCart={true} cartItemsAmount={selectedItems.length} />
       <Routes>
         <Route path="/" element={<Home />} />
