@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import man1 from "/src/assets/man 1.jpg";
 import man2 from "/src/assets/man 2.jpg";
-
+import Marquee from "react-fast-marquee";
 import { FaAngleRight, FaCartShopping } from "react-icons/fa6";
 import ListItem from "./components/ListItem";
 import useCategories from "../../hooks/useCategories";
@@ -12,10 +12,10 @@ const Home = () => {
     categoryEls = categories.map((category, i) => {
       return (
         <li
-          className="text-2xl font-serif font-bold hover:text-orange-600 cursor-pointer transition-colors"
+          className="text-2xl font-serif font-bold bg-white grow mx-[1px] first:ml-0 last:mr-0 p-7 text-center hover:text-orange-600 cursor-pointer transition-colors"
           key={i}
         >
-          {category}
+          <Link to={`/shop/${category}`}>{category}</Link>
         </li>
       );
     });
@@ -63,18 +63,16 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section>
+      <section className="border-2 border-gray-200 max-w-7xl mx-auto capitalize my-4">
         {loading && <p>Loading...</p>}
         {error && <p>Error</p>}
         {categories && (
-          <ul className="flex justify-between max-w-7xl mx-auto capitalize my-4">
-            {categoryEls}
-          </ul>
+          <ul className="flex justify-between bg-gray-200">{categoryEls}</ul>
         )}
       </section>
-      <marquee className="bg-red-600 uppercase font-bold text-white py-2 text-3xl">
+      <Marquee className="bg-red-600 uppercase font-bold text-white py-2 text-3xl">
         hot $tuff in your neighbourhood! cheapest prices and fastest delivery
-      </marquee>
+      </Marquee>
       <section className="text-center py-5 bg-orange-200">
         <h1 className="text-4xl font-bold font-serif my-2">DISCLAMER!</h1>
         <p className="text-lg">
