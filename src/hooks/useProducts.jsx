@@ -14,7 +14,7 @@ const useProducts = (product) => {
       .catch((err) => {
         setError(err);
       });
-  }, []);
+  }, [product]);
   return [loading, error, products];
 };
 export default useProducts;

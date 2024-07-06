@@ -4,11 +4,9 @@ import Shop from "./Pages/Shop/Shop";
 import ErrorPage from "./Pages/Error/Error";
 import Navbar from "./Modules/Navbar/Navbar";
 import Cart from "./Modules/Cart/Cart";
-import useProducts from "./hooks/useProducts";
 import { useState } from "react";
 import ProductDetails from "./Modules/ProductDetails/ProductDetails";
 const App = () => {
-  const [loading, error, products] = useProducts();
   const [selectedItems, setSelectedItems] = useState([]);
   const productRemoveHandler = (productIndex) => {
     setSelectedItems(
@@ -16,18 +14,19 @@ const App = () => {
     );
   };
   const addToCartHandler = (productIndex) => {
-    console.log(products);
-    setSelectedItems([...selectedItems, products[productIndex]]);
+    setSelectedItems([...selectedItems, productIndex]);
   };
   return (
     <div className="">
       <Navbar hasCart={true} cartItemsAmount={selectedItems.length} />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop onAddToCart={addToCartHandler} />} />
         <Route
-          path="/shop"
-          element={<Shop products={products} onAddToCart={addToCartHandler} />}
+          path="/shop/:category"
+          element={<Shop onAddToCart={addToCartHandler} />}
         />
+
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route
           path="/cart"

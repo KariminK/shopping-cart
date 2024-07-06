@@ -4,10 +4,11 @@ const useCategories = (category) => {
   const [error, setError] = useState("");
   const [categories, setCategories] = useState([]);
   useEffect(() => {
-    fetch(
-      "https://fakestoreapi.com/products/categories" +
-        (category ? `/${category}` : "")
-    )
+    let link = "https://fakestoreapi.com/products/categories";
+    if (category)
+      link = "https://fakestoreapi.com/products/category/" + category;
+    console.log(link);
+    fetch(link)
       .then((res) => res.json())
       .then((json) => {
         setLoading(false);
