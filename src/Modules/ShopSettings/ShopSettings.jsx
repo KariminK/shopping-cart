@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import PropTypes from "prop-types";
 const ShopSettings = ({ onFilter, categories }) => {
   const [mode, setMode] = useState("list");
   const [minPrice, setMinPrice] = useState(0);
@@ -96,4 +96,10 @@ const ShopSettings = ({ onFilter, categories }) => {
     </>
   );
 };
+
+ShopSettings.propTypes = {
+  onFilter: PropTypes.func,
+  categories: PropTypes.array,
+};
+
 export default ShopSettings;
