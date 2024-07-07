@@ -7,7 +7,7 @@
     @apply bg-orange-600 text-white px-6 py-3 hover:opacity-90;
   }
   .secondary-button {
-    @apply primary-button bg-white text-blue-600 hover:bg-blue-600 hover:text-white;
+    @apply primary-button bg-white border border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white;
   }
   .remove-button {
     @apply text-black font-bold border-solid border border-black p-3 px-5 hover:bg-black hover:text-white transition-colors;

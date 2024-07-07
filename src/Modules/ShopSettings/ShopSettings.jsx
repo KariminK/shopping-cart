@@ -42,13 +42,13 @@ const ShopSettings = ({ onFilter, categories }) => {
         aria-label="filters"
         className="flex items-center justify-between max-w-7xl mx-auto flex-wrap"
       >
-        <h1 className="text-2xl font-bold w-full mb-2">Filters:</h1>
+        <h1 className="text-2xl font-serif font-bold w-full mb-2">Filters:</h1>
         <button
           onClick={(e) => {
             e.preventDefault();
             mode === "list" ? setMode("grid") : setMode("list");
           }}
-          className="secondary-button w-32"
+          className="secondary-button w-36"
         >
           {mode + " mode"}
         </button>
@@ -60,7 +60,7 @@ const ShopSettings = ({ onFilter, categories }) => {
             value={minPrice}
             onChange={(e) => priceChangeHandler(e, setMinPrice)}
             id="minPrice"
-            className="border border-blue-400 rounded px-2 py-1 w-12"
+            className="border focus:scale-110 outline-none border-orange-400 px-2 py-1 w-12"
           />
         </label>
 
@@ -72,7 +72,7 @@ const ShopSettings = ({ onFilter, categories }) => {
             id="maxPrice"
             value={maxPrice}
             onChange={(e) => priceChangeHandler(e, setMaxPrice)}
-            className="border border-blue-400 rounded px-2  py-1 w-12"
+            className="border focus:scale-110 outline-none border-orange-400 px-2  py-1 w-12"
           />
         </label>
 
@@ -83,7 +83,7 @@ const ShopSettings = ({ onFilter, categories }) => {
             id="category"
             onChange={(e) => selectCategoryHandler(e)}
             value={selectedCategory}
-            className="border border-blue-400 p-1 rounded"
+            className="border outline-none bg-white border-orange-400 p-1"
           >
             {categoryElements}
           </select>
