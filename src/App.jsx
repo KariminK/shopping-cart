@@ -7,18 +7,28 @@ import Cart from "./Modules/Cart/Cart";
 import { useState } from "react";
 import ProductDetails from "./Modules/ProductDetails/ProductDetails";
 const App = () => {
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState({});
   const productRemoveHandler = (productIndex) => {
-    setSelectedItems(
-      selectedItems.filter((item, index) => index !== productIndex)
-    );
+    const newSelectedItems = structuredClone(selectedItems);
+    if (newSelectedItems[productIndex] > 1) newSelectedItems[productIndex]--;
+    else delete newSelectedItems[productIndex];
+    setSelectedItems(newSelectedItems);
   };
   const addToCartHandler = (productIndex) => {
-    setSelectedItems([...selectedItems, productIndex]);
+    const newSelectedItems = structuredClone(selectedItems);
+    if (!selectedItems[productIndex + 1]) {
+      newSelectedItems[productIndex + 1] = 1;
+    } else {
+      newSelectedItems[productIndex + 1]++;
+    }
+    setSelectedItems(newSelectedItems);
   };
   return (
     <div className="">
-      <Navbar hasCart={true} cartItemsAmount={selectedItems.length} />
+      <Navbar
+        hasCart={true}
+        cartItemsAmount={Object.keys(selectedItems).length}
+      />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop onAddToCart={addToCartHandler} />} />
@@ -32,7 +42,7 @@ const App = () => {
           path="/cart"
           element={
             <Cart
-              products={selectedItems}
+              productData={selectedItems}
               onProductRemove={productRemoveHandler}
             />
           }

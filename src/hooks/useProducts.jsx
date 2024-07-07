@@ -4,21 +4,32 @@ const useProducts = (product, category) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
-    let link = "https://fakestoreapi.com/products";
-    if (product) link = "https://fakestoreapi.com/products/" + product;
-    if (category)
-      link = link = "https://fakestoreapi.com/products/category/" + category;
-    fetch(link)
-      .then((res) => res.json())
-      .then((json) => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      setError("");
+      let link = "https://fakestoreapi.com/products";
+
+      if (product) link = `https://fakestoreapi.com/products/${product}`;
+      if (category)
+        link = `https://fakestoreapi.com/products/category/${category}`;
+
+      try {
+        const response = await fetch(link);
+        const data = await response.json();
+        setProducts(data);
+      } catch (err) {
+        setError(err.toString());
+      } finally {
         setLoading(false);
-        setProducts(json);
-      })
-      .catch((err) => {
-        setError(err);
-      });
-  }, [product, category]);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return [loading, error, products];
 };
+
 export default useProducts;

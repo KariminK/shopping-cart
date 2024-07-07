@@ -9,6 +9,7 @@ const ShopItem = ({
   price,
   description,
   rating,
+  amount,
   onAddToCart,
   onRemove,
 }) => {
@@ -64,11 +65,8 @@ const ShopItem = ({
         <div>
           <h1 className="text-xl font-serif font-bold">{name}</h1>
           <h2 className="text-3xl font-bold my-3 font-serif">{price}$</h2>
-          {onRemove && (
-            <button className="remove-button" onClick={() => onRemove(id)}>
-              Remove item
-            </button>
-          )}
+          <h2>Amount: {amount}</h2>
+
           <div className="flex mt-2 gap-2">
             <Link
               className="primary-button flex *:hover:opacity-100 items-center justify-between"
@@ -77,6 +75,11 @@ const ShopItem = ({
               View details{" "}
               <FaAngleRight className="opacity-0 transition-opacity" />
             </Link>
+            {onRemove && (
+              <button className="remove-button" onClick={() => onRemove(id)}>
+                Remove item
+              </button>
+            )}
             {onAddToCart && (
               <button
                 className="primary-button flex justify-around items-center gap-1 bg-black"
@@ -102,5 +105,6 @@ ShopItem.propTypes = {
   rating: PropTypes.object,
   onAddToCart: PropTypes.func,
   onRemove: PropTypes.func,
+  amount: PropTypes.number,
 };
 export default ShopItem;
