@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { FaCartShopping, FaAngleRight } from "react-icons/fa6";
+import { FaCartShopping, FaAngleRight, FaTrashCan } from "react-icons/fa6";
 import PropTypes from "prop-types";
+import Amount from "../Amount/Amount";
 const ShopItem = ({
   gridMode,
   id,
@@ -12,6 +13,7 @@ const ShopItem = ({
   amount,
   onAddToCart,
   onRemove,
+  onAmountChange,
 }) => {
   if (gridMode)
     return (
@@ -27,7 +29,9 @@ const ShopItem = ({
         <p role="paragraph" className="text-m truncate h-fit">
           {description ? description : "No description"}
         </p>
-        <h2 className="text-4xl font-serif font-bold my-3">{price}$</h2>
+        <h2 className="text-4xl font-serif font-bold my-3">
+          {price.toFixed(2)}$
+        </h2>
 
         <p role="paragraph" className="text-l">
           {rating
@@ -65,20 +69,29 @@ const ShopItem = ({
         <div>
           <h1 className="text-xl font-serif font-bold">{name}</h1>
           <h2 className="text-3xl font-bold my-3 font-serif">{price}$</h2>
-          <h2>Amount: {amount}</h2>
 
           <div className="flex mt-2 gap-2">
             <Link
-              className="primary-button flex *:hover:opacity-100 items-center justify-between"
+              className="primary-button flex gap-2 pr-3 *:hover:opacity-100 items-center justify-between"
               to={"/product/" + (id + 1)}
             >
               View details{" "}
               <FaAngleRight className="opacity-0 transition-opacity" />
             </Link>
             {onRemove && (
-              <button className="remove-button" onClick={() => onRemove(id)}>
-                Remove item
-              </button>
+              <>
+                <Amount
+                  amount={amount}
+                  onIncrease={() => onAmountChange(id, 1)}
+                  onDecrease={() =>
+                    amount === 1 ? onRemove(id) : onAmountChange(id, -1)
+                  }
+                  className={"mx-2"}
+                />
+                <button className="remove-button" onClick={() => onRemove(id)}>
+                  <FaTrashCan />
+                </button>
+              </>
             )}
             {onAddToCart && (
               <button
@@ -106,5 +119,6 @@ ShopItem.propTypes = {
   onAddToCart: PropTypes.func,
   onRemove: PropTypes.func,
   amount: PropTypes.number,
+  onAmountChange: PropTypes.number,
 };
 export default ShopItem;

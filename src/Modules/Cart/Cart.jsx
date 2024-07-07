@@ -2,7 +2,12 @@ import { Link } from "react-router-dom";
 import ShopItem from "../ShopItem/ShopItem";
 import useCart from "../../hooks/useCart";
 import PropTypes from "prop-types";
-const Cart = ({ productAmounts, productIDs, onProductRemove }) => {
+const Cart = ({
+  productAmounts,
+  productIDs,
+  onProductRemove,
+  onAmountChange,
+}) => {
   const [loading, error, products] = useCart(productIDs);
   if (productIDs.length === 0) {
     return (
@@ -30,8 +35,9 @@ const Cart = ({ productAmounts, productIDs, onProductRemove }) => {
         description={product.description}
         rating={product.rating}
         onRemove={onProductRemove}
-        amount={+productAmounts[product.id]}
+        amount={productAmounts[product.id]}
         key={id}
+        onAmountChange={onAmountChange}
       />
     );
   });
@@ -50,5 +56,6 @@ Cart.propTypes = {
   productAmounts: PropTypes.object,
   productIDs: PropTypes.array,
   onProductRemove: PropTypes.func,
+  onAmountChange: PropTypes.func,
 };
 export default Cart;

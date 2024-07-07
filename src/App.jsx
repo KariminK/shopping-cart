@@ -10,17 +10,23 @@ const App = () => {
   const [selectedItems, setSelectedItems] = useState({});
   const productRemoveHandler = (productIndex) => {
     const newSelectedItems = structuredClone(selectedItems);
-    if (newSelectedItems[productIndex] > 1) newSelectedItems[productIndex]--;
-    else delete newSelectedItems[productIndex];
+    delete newSelectedItems[productIndex];
     setSelectedItems(newSelectedItems);
   };
-  const addToCartHandler = (productIndex) => {
+  const addToCartHandler = (productIndex, amount) => {
     const newSelectedItems = structuredClone(selectedItems);
-    if (!selectedItems[productIndex + 1]) {
-      newSelectedItems[productIndex + 1] = 1;
+    if (!selectedItems[productIndex]) {
+      if (amount) newSelectedItems[productIndex] = amount;
+      else newSelectedItems[productIndex] = 1;
     } else {
-      newSelectedItems[productIndex + 1]++;
+      if (amount) newSelectedItems[productIndex] += amount;
+      else newSelectedItems[productIndex]++;
     }
+    setSelectedItems(newSelectedItems);
+  };
+  const amountChangeHandler = (productIndex, amount) => {
+    const newSelectedItems = structuredClone(selectedItems);
+    newSelectedItems[productIndex] += amount;
     setSelectedItems(newSelectedItems);
   };
   return (
@@ -37,7 +43,10 @@ const App = () => {
           element={<Shop onAddToCart={addToCartHandler} />}
         />
 
-        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route
+          path="/product/:id"
+          element={<ProductDetails onAddToCart={addToCartHandler} />}
+        />
         <Route
           path="/cart"
           element={
@@ -45,6 +54,7 @@ const App = () => {
               productIDs={Object.keys(selectedItems)}
               productAmounts={selectedItems}
               onProductRemove={productRemoveHandler}
+              onAmountChange={amountChangeHandler}
             />
           }
         />
