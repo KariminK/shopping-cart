@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import ShopItem from "../ShopItem/ShopItem";
 import useCart from "../../hooks/useCart";
 import PropTypes from "prop-types";
-const Cart = ({ productData = {}, onProductRemove }) => {
-  const [loading, error, products] = useCart(Object.keys(productData));
-  if (Object.keys(productData).length === 0) {
+const Cart = ({ productAmounts, productIDs, onProductRemove }) => {
+  const [loading, error, products] = useCart(productIDs);
+  if (productIDs.length === 0) {
     return (
       <section id="Cart" className="max-w-7xl mx-auto">
         <div className="my-10">
@@ -20,7 +20,6 @@ const Cart = ({ productData = {}, onProductRemove }) => {
 
   let productElems = [];
   productElems = products.map((product, id) => {
-    console.log(productData);
     return (
       <ShopItem
         gridMode={false}
@@ -31,7 +30,7 @@ const Cart = ({ productData = {}, onProductRemove }) => {
         description={product.description}
         rating={product.rating}
         onRemove={onProductRemove}
-        amount={+productData[product.id]}
+        amount={+productAmounts[product.id]}
         key={id}
       />
     );
@@ -48,7 +47,8 @@ const Cart = ({ productData = {}, onProductRemove }) => {
   );
 };
 Cart.propTypes = {
-  productData: PropTypes.object,
+  productAmounts: PropTypes.object,
+  productIDs: PropTypes.array,
   onProductRemove: PropTypes.func,
 };
 export default Cart;

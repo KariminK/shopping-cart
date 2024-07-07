@@ -42,7 +42,8 @@ const App = () => {
           path="/cart"
           element={
             <Cart
-              productData={selectedItems}
+              productIDs={Object.keys(selectedItems)}
+              productAmounts={selectedItems}
               onProductRemove={productRemoveHandler}
             />
           }
