@@ -6,12 +6,7 @@ import { useParams } from "react-router-dom";
 import useCategories from "../../hooks/useCategories";
 const Shop = ({ onAddToCart }) => {
   const { category } = useParams();
-  let loading, error, products;
-  if (category) {
-    [loading, error, products] = useCategories(category);
-  } else {
-    [loading, error, products] = useProducts();
-  }
+  const [loading, error, products] = useProducts(false, category);
   const [loadingCat, errorCat, categories] = useCategories();
 
   let productElements = [];
