@@ -1,9 +1,9 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 const ShopSettings = ({ onFilter, categories }) => {
-  const [mode, setMode] = useState("list");
+  const [mode, setMode] = useState(true);
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(100);
+  const [maxPrice, setMaxPrice] = useState(1000);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const priceChangeHandler = (e, setPrice) => {
     e.preventDefault();
@@ -46,11 +46,11 @@ const ShopSettings = ({ onFilter, categories }) => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            mode === "list" ? setMode("grid") : setMode("list");
+            setMode(!mode);
           }}
           className="secondary-button w-36"
         >
-          {mode + " mode"}
+          {(mode ? "grid" : "list") + " mode"}
         </button>
         <label htmlFor="minPrice">
           Min. price:{" "}
@@ -60,7 +60,7 @@ const ShopSettings = ({ onFilter, categories }) => {
             value={minPrice}
             onChange={(e) => priceChangeHandler(e, setMinPrice)}
             id="minPrice"
-            className="border focus:scale-110 outline-none border-orange-400 px-2 py-1 w-12"
+            className="border focus:scale-110 outline-none border-orange-400 px-2 py-1 w-16"
           />
         </label>
 
@@ -72,7 +72,7 @@ const ShopSettings = ({ onFilter, categories }) => {
             id="maxPrice"
             value={maxPrice}
             onChange={(e) => priceChangeHandler(e, setMaxPrice)}
-            className="border focus:scale-110 outline-none border-orange-400 px-2  py-1 w-12"
+            className="border focus:scale-110 outline-none border-orange-400 px-2  py-1 w-16"
           />
         </label>
 

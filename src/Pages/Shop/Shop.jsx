@@ -2,34 +2,58 @@ import ShopItem from "../../Modules/ShopItem/ShopItem";
 import ShopSettings from "../../Modules/ShopSettings/ShopSettings";
 import PropTypes from "prop-types";
 import useProducts from "../../hooks/useProducts";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useCategories from "../../hooks/useCategories";
+import { useState } from "react";
 const Shop = ({ onAddToCart }) => {
   const { category } = useParams();
   const [loading, error, products] = useProducts(false, category);
   const [loadingCat, errorCat, categories] = useCategories();
+  const navigate = useNavigate();
+  const [filters, setFilters] = useState({
+    mode: true,
+    minPrice: 0,
+    maxPrice: 1000,
+  });
+
+  const filterHandle = (newFilters) => {
+    if (
+      newFilters.selectedCategory != category &&
+      !(newFilters.selectedCategory === "All" && category === undefined)
+    ) {
+      navigate("/shop/" + newFilters.selectedCategory);
+    }
+    setFilters(newFilters);
+  };
 
   let productElements = [];
-  productElements = products.map((product, index) => {
-    return (
-      <ShopItem
-        gridMode={true}
-        productImage={product.image}
-        id={index}
-        name={product.title}
-        price={product.price}
-        description={product.description}
-        rating={product.rating}
-        onAddToCart={onAddToCart}
-        key={index}
-      />
-    );
-  });
+  productElements = products
+    .filter(
+      (product) =>
+        product.price > filters.minPrice && product.price < filters.maxPrice
+    )
+    .map((product, index) => {
+      return (
+        <ShopItem
+          gridMode={filters.mode}
+          productImage={product.image}
+          id={index}
+          name={product.title}
+          price={product.price}
+          description={product.description}
+          rating={product.rating}
+          onAddToCart={onAddToCart}
+          key={index}
+        />
+      );
+    });
   return (
     <>
       {errorCat && <p>Erro while loading filters</p>}
       {loadingCat && <p>Loading filters...</p>}
-      {categories && <ShopSettings categories={categories} />}
+      {categories && (
+        <ShopSettings onFilter={filterHandle} categories={categories} />
+      )}
       {loading && <p>Loading...</p>}
       {error && <p>Error</p>}
       {productElements && (

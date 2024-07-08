@@ -27,7 +27,7 @@ const useProducts = (product, category) => {
     };
 
     fetchProducts();
-  }, []);
+  }, [category]);
 
   return [loading, error, products];
 };
