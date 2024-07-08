@@ -40,44 +40,55 @@ const ShopSettings = ({ onFilter, categories }) => {
     <>
       <form
         aria-label="filters"
-        className="flex items-center justify-between max-w-7xl mx-auto flex-wrap"
+        className="flex items-center justify-between max-w-7xl mx-auto flex-wrap md:flex-col md:items-stretch md:p-2"
       >
-        <h1 className="text-2xl font-serif font-bold w-full mb-2">Filters:</h1>
+        <h1 className="text-2xl font-serif font-bold w-full mb-2 md:text-3xl">
+          Filters:
+        </h1>
         <button
           onClick={(e) => {
             e.preventDefault();
             setMode(!mode);
           }}
-          className="secondary-button w-36"
+          className="secondary-button w-36 md:w-full"
         >
           {(mode ? "grid" : "list") + " mode"}
         </button>
-        <label htmlFor="minPrice">
-          Min. price:{" "}
+        <label
+          className="md:my-2 md:flex md:justify-between md:text-lg"
+          htmlFor="minPrice"
+        >
+          <span>Min. price:</span>{" "}
           <input
             type="text"
             name="minPrice"
             value={minPrice}
             onChange={(e) => priceChangeHandler(e, setMinPrice)}
             id="minPrice"
-            className="border focus:scale-110 outline-none border-orange-400 px-2 py-1 w-16"
+            className="border focus:scale-110 outline-none border-orange-400 px-2 py-1 w-16 md:w-max"
           />
         </label>
 
-        <label htmlFor="maxPrice">
-          Max. price:{" "}
+        <label
+          className="md:my-2 md:flex md:justify-between md:text-lg"
+          htmlFor="maxPrice"
+        >
+          <span>Max. price:</span>{" "}
           <input
             type="text"
             name="maxPrice"
             id="maxPrice"
             value={maxPrice}
             onChange={(e) => priceChangeHandler(e, setMaxPrice)}
-            className="border focus:scale-110 outline-none border-orange-400 px-2  py-1 w-16"
+            className="border focus:scale-110 outline-none border-orange-400 px-2  py-1 w-16 md:w-max"
           />
         </label>
 
-        <label htmlFor="category">
-          Category:{" "}
+        <label
+          className="md:my-2 md:flex md:justify-between md:text-lg"
+          htmlFor="category"
+        >
+          <span>Category:</span>{" "}
           <select
             name="category"
             id="category"

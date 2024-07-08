@@ -57,7 +57,7 @@ const Shop = ({ onAddToCart }) => {
       {loading && <p>Loading...</p>}
       {error && <p>Error</p>}
       {productElements && (
-        <div className="mx-10 p-3 grid gap-4 grid-cols-4">
+        <div className="mx-10 p-3 grid gap-4 grid-cols-4 lg:grid-cols-2 xl:grid-cols-3 md:grid-cols-1 sm:p-0">
           {productElements}
         </div>
       )}

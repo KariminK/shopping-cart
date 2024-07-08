@@ -58,19 +58,19 @@ const ShopItem = ({
     );
   else
     return (
-      <li className="flex items-center border border-black my-2 h-52">
-        <div className="max-w-28 max-h-52 flex items-center justify-center overflow-hidden mx-3">
+      <li className="grid grid-cols-3 border border-black my-2 h-52">
+        <div className="max-w-28 max-h-52 place-self-center flex items-center justify-center overflow-hidden mx-3">
           <img
             src={productImage}
             alt="product's image"
             className="mx-auto h-4/5"
           />
         </div>
-        <div>
-          <h1 className="text-xl font-serif font-bold">{name}</h1>
+        <div className="col-span-2">
+          <h1 className="text-xl font-serif font-bold truncate">{name}</h1>
           <h2 className="text-3xl font-bold my-3 font-serif">{price}$</h2>
 
-          <div className="flex mt-2 gap-2">
+          <div className="flex p-2 flex-col mt-2 gap-2">
             <Link
               className="primary-button flex gap-2 pr-3 *:hover:opacity-100 items-center justify-between"
               to={"/product/" + (id + 1)}
@@ -78,30 +78,35 @@ const ShopItem = ({
               View details{" "}
               <FaAngleRight className="opacity-0 transition-opacity" />
             </Link>
-            {onRemove && (
-              <>
-                <Amount
-                  amount={amount}
-                  onIncrease={() => onAmountChange(id, 1)}
-                  onDecrease={() =>
-                    amount === 1 ? onRemove(id) : onAmountChange(id, -1)
-                  }
-                  className={"mx-2"}
-                />
-                <button className="remove-button" onClick={() => onRemove(id)}>
-                  <FaTrashCan />
+            <div className="flex">
+              {onRemove && (
+                <>
+                  <Amount
+                    amount={amount}
+                    onIncrease={() => onAmountChange(id, 1)}
+                    onDecrease={() =>
+                      amount === 1 ? onRemove(id) : onAmountChange(id, -1)
+                    }
+                    className={"mx-2 grow"}
+                  />
+                  <button
+                    className="remove-button"
+                    onClick={() => onRemove(id)}
+                  >
+                    <FaTrashCan />
+                  </button>
+                </>
+              )}
+              {onAddToCart && (
+                <button
+                  className="primary-button grow flex justify-between items-center gap-1 bg-black"
+                  onClick={() => onAddToCart(id)}
+                >
+                  Add to
+                  <FaCartShopping />
                 </button>
-              </>
-            )}
-            {onAddToCart && (
-              <button
-                className="primary-button flex justify-around items-center gap-1 bg-black"
-                onClick={() => onAddToCart(id)}
-              >
-                Add to
-                <FaCartShopping />
-              </button>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </li>
@@ -119,6 +124,6 @@ ShopItem.propTypes = {
   onAddToCart: PropTypes.func,
   onRemove: PropTypes.func,
   amount: PropTypes.number,
-  onAmountChange: PropTypes.number,
+  onAmountChange: PropTypes.func,
 };
 export default ShopItem;

@@ -4,7 +4,7 @@
 
 @layer components {
   .primary-button {
-    @apply bg-orange-600 text-white px-6 py-3 hover:opacity-80;
+    @apply bg-orange-600 text-white px-6 py-3 hover:opacity-80 sm:px-3;
   }
   .secondary-button {
     @apply primary-button bg-white border border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white;
