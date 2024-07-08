@@ -17,7 +17,7 @@ const Navbar = ({ hasCart, cartItemsAmount }) => {
   return (
     <nav className="sticky top-0 w-full z-10  px-5 py-5 border-b-2 border-b-slate-200 bg-white box">
       {mode === "mobile" ? (
-        <div className="MOBILE_MENU sm:hidden flex justify-between flex-wrap">
+        <div className="MOBILE_MENU sm:flex hidden justify-between flex-wrap">
           <h1 className="text-3xl font-bold text-orange-500">eShop</h1>
           <button
             onClick={() => {
@@ -29,7 +29,7 @@ const Navbar = ({ hasCart, cartItemsAmount }) => {
           {showLinks && (
             <ul
               className={
-                "links font-semibold flex flex-col w-full justify-center text-left mt-5 sm:block sm:w-max sm:mt-0"
+                "links font-semibold sm:flex flex-col sm:w-full justify-center text-left mt-5 block w-max sm:mt-0"
               }
             >
               <li
@@ -85,7 +85,7 @@ const Navbar = ({ hasCart, cartItemsAmount }) => {
           )}
         </div>
       ) : (
-        <div className="DESKTOP_MENU hidden sm:flex mx-auto max-w-7xl justify-between items-center">
+        <div className="DESKTOP_MENU flex sm:hidden mx-auto max-w-7xl justify-between items-center">
           <h1 className="text-4xl font-bold text-orange-600">$tuff</h1>
           <div className={"links"}>
             <Link

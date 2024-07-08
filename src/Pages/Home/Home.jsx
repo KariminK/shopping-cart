@@ -12,7 +12,7 @@ const Home = () => {
     categoryEls = categories.map((category, i) => {
       return (
         <li
-          className="text-2xl font-serif font-bold bg-white grow mx-[1px] first:ml-0 last:mr-0 p-7 text-center hover:text-orange-600 cursor-pointer transition-colors"
+          className="text-2xl flex justify-center items-center font-serif font-bold bg-white grow mx-[1px] sm:my-[1px] first:ml-0 last:mr-0 p-7 text-center hover:text-orange-600 cursor-pointer transition-colors"
           key={i}
         >
           <Link to={`/shop/${category}`}>{category}</Link>
@@ -22,7 +22,7 @@ const Home = () => {
   }
   return (
     <>
-      <section className="mt-4 max-w-7xl mx-auto grid grid-cols-3 mb-6">
+      <section className="mt-4 max-w-7xl lg:p-1 mx-auto grid grid-cols-3 sm:block mb-6">
         <div className="max-w-md">
           <h1 className="text-6xl font-bold font-serif">
             Cheapest online store ever on Earth
@@ -44,20 +44,20 @@ const Home = () => {
             <ListItem>No margin for store</ListItem>
           </ul>
         </div>
-        <div className="relative col-span-2">
-          <div className="rotate-6 p-2 bg-gradient-to-t from-orange-400 via-yellow-400 to-orange-400 absolute top-5 left-10 shadow-inner h-fit">
+        <div className="relative col-span-2 sm:flex sm:justify-around">
+          <div className="rotate-6 p-2 bg-gradient-to-t from-orange-400 via-yellow-400 to-orange-400 absolute top-5 left-10 sm:static sm:bg-none sm:rotate-0 sm:p-0 shadow-inner h-fit">
             <img
               src={man1}
               alt=""
-              className="w-[350px] -rotate-6"
+              className="w-[350px] lg:w-[250px] -rotate-6"
               title="created with bing"
             />
           </div>
-          <div className="-rotate-12 p-2 bg-gradient-to-t from-orange-400 via-yellow-400 to-orange-400 absolute bottom-5 right-0 shadow-inner h-fit">
+          <div className="-rotate-12 p-2 bg-gradient-to-t from-orange-400 via-yellow-400 to-orange-400 absolute bottom-5 right-0 sm:static sm:bg-none sm:rotate-0 sm:p-0 shadow-inner h-fit">
             <img
               src={man2}
               alt=""
-              className="w-[250px] rotate-6"
+              className="w-[250px] lg:w-[200px] rotate-6"
               title="created with bing"
             />
           </div>
@@ -67,7 +67,9 @@ const Home = () => {
         {loading && <p>Loading...</p>}
         {error && <p>Error</p>}
         {categories && (
-          <ul className="flex justify-between bg-gray-200">{categoryEls}</ul>
+          <ul className="flex justify-between sm:flex-col bg-gray-200">
+            {categoryEls}
+          </ul>
         )}
       </section>
       <Marquee className="bg-red-600 uppercase font-bold text-white py-2 text-3xl">
