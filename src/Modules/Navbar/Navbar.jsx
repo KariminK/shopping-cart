@@ -2,14 +2,23 @@ import { Link, useLocation } from "react-router-dom";
 import navbarIcon from "../../assets/navbar-icon.svg";
 import { useEffect, useState } from "react";
 
-const Navbar = ({ hasCart, onCartClick, cartItemsAmount }) => {
+const Navbar = ({ hasCart, cartItemsAmount }) => {
   const [showLinks, setShowLinks] = useState(false);
+  const [mode, setMode] = useState(
+    window.innerWidth < 650 ? "mobile" : "desktop"
+  );
   const { pathname } = useLocation();
+  useEffect(() => {
+    addEventListener("resize", () => {
+      if (innerWidth < 650) setMode("mobile");
+      else setMode("desktop");
+    });
+  }, []);
   return (
-    <nav className="sticky top-0 w-full text-slate-700 px-5 py-5 border-b-2 border-b-slate-200 bg-white box">
-      {window.innerWidth < 600 ? (
+    <nav className="sticky top-0 w-full z-10  px-5 py-5 border-b-2 border-b-slate-200 bg-white box">
+      {mode === "mobile" ? (
         <div className="MOBILE_MENU sm:hidden flex justify-between flex-wrap">
-          <h1 className="text-3xl font-bold text-yellow-400">eShop</h1>
+          <h1 className="text-3xl font-bold text-orange-500">eShop</h1>
           <button
             onClick={() => {
               setShowLinks(!showLinks);
@@ -18,29 +27,61 @@ const Navbar = ({ hasCart, onCartClick, cartItemsAmount }) => {
             <img src={navbarIcon} alt="show links" className="w-7" />
           </button>
           {showLinks && (
-            <div
+            <ul
               className={
-                "links flex flex-col w-full justify-center text-left mt-5 sm:block sm:w-max sm:mt-0"
+                "links font-semibold flex flex-col w-full justify-center text-left mt-5 sm:block sm:w-max sm:mt-0"
               }
             >
-              <Link
-                className="mx-5 py-3 hover:text-yellow-400 transition border-b border-b-slate-100"
-                to={"/"}
+              <li
+                className={
+                  "py-3 border-b" +
+                  (pathname === "/"
+                    ? " text-orange-600  border-b-orange-500"
+                    : " border-b-slate-500")
+                }
               >
-                Home
-              </Link>
-              <Link
-                className="mx-5 py-3 hover:text-yellow-400 transition border-b border-b-slate-100"
-                to={"/shop"}
+                <Link
+                  className="hover:text-orange-400 transition text-xl"
+                  to={"/"}
+                >
+                  Home
+                </Link>
+              </li>
+
+              <li
+                className={
+                  "py-3 border-b" +
+                  (pathname === "/shop"
+                    ? " text-orange-600  border-b-orange-500"
+                    : " border-b-slate-500")
+                }
               >
-                Shop
-              </Link>
+                <Link
+                  className="hover:text-orange-400 transition text-xl"
+                  to={"/shop"}
+                >
+                  Shop
+                </Link>
+              </li>
               {hasCart && (
-                <button className="mx-5 py-3 text-left" onClick={onCartClick}>
-                  Cart
-                </button>
+                <li
+                  className={
+                    "py-3 border-b" +
+                    (pathname === "/cart"
+                      ? " text-orange-600  border-b-orange-500"
+                      : " border-b-slate-500")
+                  }
+                >
+                  <Link
+                    className="hover:text-orange-400 transition text-xl"
+                    to={"/cart"}
+                  >
+                    Cart{" "}
+                    {cartItemsAmount !== undefined && `[${cartItemsAmount}]`}
+                  </Link>
+                </li>
               )}
-            </div>
+            </ul>
           )}
         </div>
       ) : (
