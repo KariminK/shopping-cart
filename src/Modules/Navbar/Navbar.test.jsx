@@ -1,8 +1,7 @@
-import { expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import Navbar from "./Navbar";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import userEvent from "@testing-library/user-event";
 describe("Navbar", () => {
   it("renders propertly", () => {
     render(<Navbar />, { wrapper: BrowserRouter });

@@ -27,10 +27,10 @@ const ShopItem = ({
         </div>
         <h1 className="text-2xl font-serif font-bold truncate">{name}</h1>
         <p role="paragraph" className="text-m truncate h-fit">
-          {description ? description : "No description"}
+          {description ? description.slice(0, 50) + "..." : "No description"}
         </p>
         <h2 className="text-4xl font-serif font-bold my-3">
-          {price.toFixed(2)}$
+          {price?.toFixed(2)}$
         </h2>
 
         <p role="paragraph" className="text-l">
@@ -68,7 +68,9 @@ const ShopItem = ({
         </div>
         <div className="col-span-2">
           <h1 className="text-xl font-serif font-bold truncate">{name}</h1>
-          <h2 className="text-3xl font-bold my-3 font-serif">{price}$</h2>
+          <h2 className="text-3xl font-bold my-3 font-serif">
+            {price?.toFixed(2)}$
+          </h2>
 
           <div className="flex p-2 flex-col mt-2 gap-2">
             <Link

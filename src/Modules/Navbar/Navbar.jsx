@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import navbarIcon from "../../assets/navbar-icon.svg";
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 const Navbar = ({ hasCart, cartItemsAmount }) => {
   const [showLinks, setShowLinks] = useState(false);
@@ -128,5 +129,9 @@ const Navbar = ({ hasCart, cartItemsAmount }) => {
       )}
     </nav>
   );
+};
+Navbar.propTypes = {
+  hasCart: PropTypes.bool,
+  cartItemsAmount: PropTypes.number,
 };
 export default Navbar;

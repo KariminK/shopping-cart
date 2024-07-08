@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, vi } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import ShopSettings from "./ShopSettings";
 import userEvent from "@testing-library/user-event";
 
@@ -11,7 +11,7 @@ describe("Shop settings", () => {
   it("has grid to list mode switch button", () => {
     render(<ShopSettings />);
     expect(
-      screen.getByRole("button", { name: "list mode" })
+      screen.getByRole("button", { name: "grid mode" })
     ).toBeInTheDocument();
   });
   it("has min and max price inputs", () => {
@@ -82,9 +82,9 @@ describe("Shop settings", () => {
   it("calls callback after filter button click, and pass into it all form data into an object", async () => {
     const onFilter = vi.fn((filters) => {
       expect(filters).toEqual({
-        mode: "list",
+        mode: true,
         minPrice: 0,
-        maxPrice: 100,
+        maxPrice: 1000,
         selectedCategory: "All",
       });
     });
@@ -97,7 +97,7 @@ describe("Shop settings", () => {
   it("passes correct data after changing default", async () => {
     const onFilter = vi.fn((filters) => {
       expect(filters).toEqual({
-        mode: "grid",
+        mode: false,
         minPrice: 20,
         maxPrice: 140,
         selectedCategory: "example2",
@@ -112,7 +112,7 @@ describe("Shop settings", () => {
     const select = screen.getByRole("combobox");
     const maxPriceInput = screen.getByLabelText("Max. price:");
     const minPriceInput = screen.getByLabelText("Min. price:");
-    const changeModeBtn = screen.getByRole("button", { name: "list mode" });
+    const changeModeBtn = screen.getByRole("button", { name: "grid mode" });
     const filterBtn = screen.getByRole("button", { name: "Filter" });
     const user = userEvent.setup();
     await user.click(minPriceInput);

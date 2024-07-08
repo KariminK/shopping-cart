@@ -6,6 +6,7 @@ const Amount = ({ amount, onIncrease, onDecrease, className }) => {
     <div className={"flex " + className}>
       <button
         className="primary-button bg-black px-2 rounded-l-full"
+        aria-label="increase"
         onClick={onIncrease}
       >
         <FaPlus />
@@ -18,6 +19,7 @@ const Amount = ({ amount, onIncrease, onDecrease, className }) => {
       />
       <button
         className="primary-button bg-black px-2 rounded-r-full"
+        aria-label="decrease"
         onClick={onDecrease}
       >
         <FaMinus />

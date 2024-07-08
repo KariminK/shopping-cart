@@ -11,9 +11,13 @@ const ProductDetails = ({ onAddToCart }) => {
   if (loading) return <h1>Loading details...</h1>;
   if (error) navigate("/error");
   return (
-    <div className="grid grid-cols-2 my-10 gap-10 max-w-6xl mx-auto">
+    <div className="grid grid-cols-2 sm:block my-10 gap-10 max-w-6xl mx-auto">
       <div className="flex items-center justify-center border-r-2">
-        <img src={product.image} alt={product.title} className="w-4/5" />
+        <img
+          src={product.image}
+          alt={product.title}
+          className="w-4/5 sm:w-1/2"
+        />
       </div>
       <div className="bg-white p-3">
         <h1 className="text-4xl font-bold font-serif">{product.title}</h1>
@@ -28,7 +32,7 @@ const ProductDetails = ({ onAddToCart }) => {
             onDecrease={() => setAmount(amount !== 1 ? amount - 1 : amount)}
           />
           <button
-            className="primary-button"
+            className="primary-button sm:grow"
             onClick={() => onAddToCart(id, amount)}
           >
             Add to cart
