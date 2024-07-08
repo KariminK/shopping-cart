@@ -36,19 +36,19 @@ const App = () => {
         cartItemsAmount={Object.keys(selectedItems).length}
       />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/shopping-cart/" element={<Home />} />
         <Route path="/shop" element={<Shop onAddToCart={addToCartHandler} />} />
         <Route
-          path="/shop/:category"
+          path="/shopping-cart/shop/:category"
           element={<Shop onAddToCart={addToCartHandler} />}
         />
 
         <Route
-          path="/product/:id"
+          path="/shopping-cart/product/:id"
           element={<ProductDetails onAddToCart={addToCartHandler} />}
         />
         <Route
-          path="/cart"
+          path="/shopping-cart/cart"
           element={
             <Cart
               productIDs={Object.keys(selectedItems)}
