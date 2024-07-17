@@ -15,7 +15,7 @@ const Home = () => {
           className="text-2xl flex justify-center items-center font-serif font-bold bg-white grow mx-[1px] sm:my-[1px] first:ml-0 last:mr-0 p-7 text-center hover:text-orange-600 cursor-pointer transition-colors"
           key={i}
         >
-          <Link to={`/shop/${category}`}>{category}</Link>
+          <Link to={`/shopping-cart/shop/${category}`}>{category}</Link>
         </li>
       );
     });
@@ -28,10 +28,16 @@ const Home = () => {
             Cheapest online store ever on Earth
           </h1>
           <div className="flex items-center gap-4 mt-5 mb-10">
-            <Link className="primary-button flex items-center " to={"/shop"}>
+            <Link
+              className="primary-button flex items-center "
+              to={"/shopping-cart/shop"}
+            >
               Explore More <FaAngleRight className="ml-2" />
             </Link>
-            <Link className="primary-button p-4 bg-black" to={"/cart"}>
+            <Link
+              className="primary-button p-4 bg-black"
+              to={"/shopping-cart/cart"}
+            >
               <FaCartShopping />
             </Link>
           </div>

@@ -37,7 +37,10 @@ const App = () => {
       />
       <Routes>
         <Route path="/shopping-cart/" element={<Home />} />
-        <Route path="/shop" element={<Shop onAddToCart={addToCartHandler} />} />
+        <Route
+          path="/shopping-cart/shop"
+          element={<Shop onAddToCart={addToCartHandler} />}
+        />
         <Route
           path="/shopping-cart/shop/:category"
           element={<Shop onAddToCart={addToCartHandler} />}

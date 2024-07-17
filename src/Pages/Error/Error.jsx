@@ -4,7 +4,7 @@ const ErrorPage = () => {
   return (
     <>
       <h1 className="text-2xl font-bold">Oops, an error has occured</h1>
-      <Link className="primary-button" to={"/"}>
+      <Link className="primary-button" to={"/shopping-cart/"}>
         Go back to homepage
       </Link>
     </>

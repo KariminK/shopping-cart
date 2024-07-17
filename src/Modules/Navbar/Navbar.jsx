@@ -36,14 +36,14 @@ const Navbar = ({ hasCart, cartItemsAmount }) => {
               <li
                 className={
                   "py-3 border-b" +
-                  (pathname === "/"
+                  (pathname === "/shopping-cart/"
                     ? " text-orange-600  border-b-orange-500"
                     : " border-b-slate-500")
                 }
               >
                 <Link
                   className="hover:text-orange-400 transition text-xl"
-                  to={"/"}
+                  to={"/shopping-cart/"}
                 >
                   Home
                 </Link>
@@ -52,14 +52,14 @@ const Navbar = ({ hasCart, cartItemsAmount }) => {
               <li
                 className={
                   "py-3 border-b" +
-                  (pathname === "/shop"
+                  (pathname === "/shopping-cart/shop"
                     ? " text-orange-600  border-b-orange-500"
                     : " border-b-slate-500")
                 }
               >
                 <Link
                   className="hover:text-orange-400 transition text-xl"
-                  to={"/shop"}
+                  to={"/shopping-cart/shop"}
                 >
                   Shop
                 </Link>
@@ -68,14 +68,14 @@ const Navbar = ({ hasCart, cartItemsAmount }) => {
                 <li
                   className={
                     "py-3 border-b" +
-                    (pathname === "/cart"
+                    (pathname === "/shopping-cart/cart"
                       ? " text-orange-600  border-b-orange-500"
                       : " border-b-slate-500")
                   }
                 >
                   <Link
                     className="hover:text-orange-400 transition text-xl"
-                    to={"/cart"}
+                    to={"/shopping-cart/cart"}
                   >
                     Cart{" "}
                     {cartItemsAmount !== undefined && `[${cartItemsAmount}]`}
@@ -92,22 +92,22 @@ const Navbar = ({ hasCart, cartItemsAmount }) => {
             <Link
               className={
                 "px-5 border-r hover:text-slate-900 transition text-xl pb-2 border-slate-100" +
-                (pathname === "/"
+                (pathname === "/shopping-cart/"
                   ? " text-orange-600 border-b-2 border-b-orange-500"
                   : "")
               }
-              to={"/"}
+              to={"/shopping-cart/"}
             >
               Home
             </Link>
             <Link
               className={
                 "px-5 border-r hover:text-slate-900 transition text-xl pb-2 border-slate-100" +
-                (pathname === "/shop"
+                (pathname === "/shopping-cart/shop"
                   ? " text-orange-600 border-b-2 border-b-orange-500"
                   : "")
               }
-              to={"/shop"}
+              to={"/shopping-cart/shop"}
             >
               Shop
             </Link>
@@ -115,11 +115,11 @@ const Navbar = ({ hasCart, cartItemsAmount }) => {
               <Link
                 className={
                   "px-5 border-r hover:text-slate-900 transition text-xl pb-2 border-slate-100" +
-                  (pathname === "/cart"
+                  (pathname === "/shopping-cart/cart"
                     ? " text-orange-600 border-b-2 border-b-orange-500"
                     : "")
                 }
-                to={"/cart"}
+                to={"/shopping-cart/cart"}
               >
                 Cart {cartItemsAmount !== undefined && `[${cartItemsAmount}]`}
               </Link>

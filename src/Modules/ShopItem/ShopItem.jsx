@@ -41,7 +41,7 @@ const ShopItem = ({
         <div className="flex mt-2 gap-2">
           <Link
             className="primary-button grow flex *:hover:opacity-100 items-center justify-between"
-            to={"/product/" + (id + 1)}
+            to={"/shopping-cart/product/" + id}
           >
             View details{" "}
             <FaAngleRight className="opacity-0 transition-opacity" />
@@ -75,7 +75,7 @@ const ShopItem = ({
           <div className="flex p-2 flex-col mt-2 gap-2">
             <Link
               className="primary-button flex gap-2 pr-3 *:hover:opacity-100 items-center justify-between"
-              to={"/product/" + (id + 1)}
+              to={"/shopping-cart/product/" + id}
             >
               View details{" "}
               <FaAngleRight className="opacity-0 transition-opacity" />

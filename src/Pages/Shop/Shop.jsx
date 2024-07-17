@@ -37,13 +37,13 @@ const Shop = ({ onAddToCart }) => {
         <ShopItem
           gridMode={filters.mode}
           productImage={product.image}
-          id={index}
+          id={index + 1}
           name={product.title}
           price={product.price}
           description={product.description}
           rating={product.rating}
           onAddToCart={onAddToCart}
-          key={index}
+          key={index + 1}
         />
       );
     });

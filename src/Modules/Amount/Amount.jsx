@@ -11,12 +11,9 @@ const Amount = ({ amount, onIncrease, onDecrease, className }) => {
       >
         <FaPlus />
       </button>
-      <input
-        type="text"
-        className="outline-none border-2 cursor-default text-center border-black py-1 px-3 w-16"
-        value={amount}
-        readOnly
-      />
+      <p className="outline-none flex justify-center items-center border-2 cursor-default border-black py-1 px-3 w-16">
+        {amount}
+      </p>
       <button
         className="primary-button bg-black px-2 rounded-r-full"
         aria-label="decrease"
